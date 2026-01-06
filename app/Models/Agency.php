@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Agency extends Model
 {
@@ -20,4 +21,9 @@ class Agency extends Model
         'agency_code',
         'logo',
     ];
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
+    }
 }

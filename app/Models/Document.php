@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Document extends Model
 {
@@ -40,4 +41,14 @@ class Document extends Model
         'date_filed',
         'tags',
     ];
+
+    public function agency(): BelongsTo
+    {
+        return $this->belongsTo(Agency::class);
+    }
+
+    public function issuanceType(): BelongsTo
+    {
+        return $this->belongsTo(IssuanceType::class);
+    }
 }

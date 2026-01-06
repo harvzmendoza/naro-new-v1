@@ -19,30 +19,30 @@
             </p>
             <!-- Search Component -->
             <div class="w-full max-w-[640px] shadow-2xl rounded-xl overflow-hidden">
-                <div class="flex flex-col md:flex-row bg-white dark:bg-card-dark rounded-xl p-2 gap-2 border border-white/10">
+                <form action="{{ route('search') }}" method="GET" class="flex flex-col md:flex-row bg-white dark:bg-card-dark rounded-xl p-2 gap-2 border border-white/10">
                     <div class="relative flex-grow group">
                         <div class="absolute left-3 top-1/2 -translate-y-1/2 text-text-sec-light">
                             <span class="material-symbols-outlined">search</span>
                         </div>
-                        <input class="w-full h-12 pl-10 pr-4 rounded-lg bg-background-light dark:bg-background-dark/50 border-transparent focus:border-primary focus:bg-white dark:focus:bg-background-dark focus:ring-0 text-text-main-light dark:text-white placeholder:text-text-sec-light transition-all text-sm md:text-base" placeholder="Search by keyword, bulletin number, or title..." type="text"/>
+                        <input name="q" class="w-full h-12 pl-10 pr-4 rounded-lg bg-background-light dark:bg-background-dark/50 border-transparent focus:border-primary focus:bg-white dark:focus:bg-background-dark focus:ring-0 text-text-main-light dark:text-white placeholder:text-text-sec-light transition-all text-sm md:text-base" placeholder="Search by keyword, bulletin number, or title..." type="text" value="{{ request('q') }}"/>
                     </div>
                     <div class="flex gap-2">
-                        <select class="h-12 pl-3 pr-8 rounded-lg bg-background-light dark:bg-background-dark/50 border-transparent focus:border-primary focus:ring-0 text-text-main-light dark:text-white text-sm cursor-pointer w-full md:w-auto">
-                            <option>All Years</option>
-                            <option>2024</option>
-                            <option>2023</option>
-                            <option>2022</option>
+                        <select name="year" class="h-12 pl-3 pr-8 rounded-lg bg-background-light dark:bg-background-dark/50 border-transparent focus:border-primary focus:ring-0 text-text-main-light dark:text-white text-sm cursor-pointer w-full md:w-auto">
+                            <option value="">All Years</option>
+                            @foreach($availableYears as $year)
+                                <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endforeach
                         </select>
-                        <button class="bg-primary hover:opacity-90 text-white h-12 px-6 rounded-lg font-bold text-sm md:text-base flex items-center justify-center gap-2 transition-colors min-w-[120px]">
+                        <button type="submit" class="bg-primary hover:opacity-90 text-white h-12 px-6 rounded-lg font-bold text-sm md:text-base flex items-center justify-center gap-2 transition-colors min-w-[120px]">
                             Search
                         </button>
                     </div>
-                </div>
+                </form>
                 <div class="bg-black/20 backdrop-blur-sm px-4 py-2 text-left flex gap-4 text-xs text-white/70">
                     <span>Popular:</span>
-                    <a class="hover:text-white underline decoration-white/30" href="#">Tax Reform</a>
-                    <a class="hover:text-white underline decoration-white/30" href="#">Labor Guidelines</a>
-                    <a class="hover:text-white underline decoration-white/30" href="#">Health Protocols</a>
+                    <a class="hover:text-white underline decoration-white/30" href="{{ route('search', ['q' => 'Tax Reform']) }}">Tax Reform</a>
+                    <a class="hover:text-white underline decoration-white/30" href="{{ route('search', ['q' => 'Labor Guidelines']) }}">Labor Guidelines</a>
+                    <a class="hover:text-white underline decoration-white/30" href="{{ route('search', ['q' => 'Health Protocols']) }}">Health Protocols</a>
                 </div>
             </div>
         </div>
@@ -59,55 +59,28 @@
                 View all agencies <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Agency Card 1 -->
-            <a class="group flex flex-col p-5 bg-white dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" href="#">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400">account_balance</span>
-                    </div>
-                    <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">BIR</span>
-                </div>
-                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark group-hover:text-primary transition-colors mb-1">Bureau of Internal Revenue</h3>
-                <p class="text-sm text-text-sec-light dark:text-text-sec-dark mt-auto">1,240 Issuances</p>
-            </a>
-
-            <!-- Agency Card 2 -->
-            <a class="group flex flex-col p-5 bg-white dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" href="#">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-green-600 dark:text-green-400">query_stats</span>
-                    </div>
-                    <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">SEC</span>
-                </div>
-                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark group-hover:text-primary transition-colors mb-1">Securities and Exchange Commission</h3>
-                <p class="text-sm text-text-sec-light dark:text-text-sec-dark mt-auto">980 Issuances</p>
-            </a>
-
-            <!-- Agency Card 3 -->
-            <a class="group flex flex-col p-5 bg-white dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" href="#">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-blue-600 dark:text-blue-400">engineering</span>
-                    </div>
-                    <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">DOLE</span>
-                </div>
-                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark group-hover:text-primary transition-colors mb-1">Dept. of Labor and Employment</h3>
-                <p class="text-sm text-text-sec-light dark:text-text-sec-dark mt-auto">850 Issuances</p>
-            </a>
-
-            <!-- Agency Card 4 -->
-            <a class="group flex flex-col p-5 bg-white dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" href="#">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-red-600 dark:text-red-400">medical_services</span>
-                    </div>
-                    <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">DOH</span>
-                </div>
-                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark group-hover:text-primary transition-colors mb-1">Department of Health</h3>
-                <p class="text-sm text-text-sec-light dark:text-text-sec-dark mt-auto">600 Issuances</p>
-            </a>
-        </div>
+        @if($agencies->isEmpty())
+            <p class="text-text-sec-light dark:text-text-sec-dark">No agencies found.</p>
+        @else
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach($agencies as $agency)
+                    <a class="group flex flex-col p-5 bg-white dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" href="{{ route('search', ['agency_id' => $agency->id]) }}">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 flex items-center justify-center">
+                                @if($agency->logo)
+                                    <img src="{{ asset('storage/' . $agency->logo) }}" alt="{{ $agency->name }} Logo" class="h-full w-full object-contain p-1"/>
+                                @else
+                                    <span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400">account_balance</span>
+                                @endif
+                            </div>
+                            <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">{{ $agency->agency_code ?? \Illuminate\Support\Str::limit($agency->name, 3, '') }}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark group-hover:text-primary transition-colors mb-1">{{ $agency->name }}</h3>
+                        <p class="text-sm text-text-sec-light dark:text-text-sec-dark mt-auto">{{ number_format($agency->documents_count) }} Issuance{{ $agency->documents_count == 1 ? '' : 's' }}</p>
+                    </a>
+                @endforeach
+            </div>
+        @endif
         <div class="mt-6 md:hidden">
             <a class="flex items-center justify-center w-full py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-primary font-bold text-sm" href="#">
                 View all agencies
@@ -139,111 +112,51 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-border-light dark:divide-border-dark">
-                        <tr class="hover:bg-background-light/50 dark:hover:bg-background-dark/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">Oct 24, 2023</td>
-                            <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">RMC-2023-98</td>
-                            <td class="px-6 py-4">
-                                <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="Clarification on the Taxation of Online Sellers">
-                                    Clarification on the Taxation of Online Sellers and Digital Marketplaces
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center text-[10px] font-bold text-yellow-800">B</div>
-                                    <span class="text-text-main-light dark:text-text-main-dark">BIR</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-text-sec-light hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">download</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-background-light/50 dark:hover:bg-background-dark/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">Oct 23, 2023</td>
-                            <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">DO-174-23</td>
-                            <td class="px-6 py-4">
-                                <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="Revised Rules on Contracting and Subcontracting Arrangements">
-                                    Revised Rules on Contracting and Subcontracting Arrangements
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-800">D</div>
-                                    <span class="text-text-main-light dark:text-text-main-dark">DOLE</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-text-sec-light hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">download</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-background-light/50 dark:hover:bg-background-dark/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">Oct 22, 2023</td>
-                            <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">MC-2023-05</td>
-                            <td class="px-6 py-4">
-                                <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="Guidelines on the Submission of Annual Financial Statements">
-                                    Guidelines on the Submission of Annual Financial Statements via OST
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-[10px] font-bold text-green-800">S</div>
-                                    <span class="text-text-main-light dark:text-text-main-dark">SEC</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-text-sec-light hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">download</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-background-light/50 dark:hover:bg-background-dark/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">Oct 22, 2023</td>
-                            <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">AO-2023-0012</td>
-                            <td class="px-6 py-4">
-                                <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="National Policy on the Prevention and Control of Non-Communicable Diseases">
-                                    National Policy on the Prevention and Control of Non-Communicable Diseases
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-[10px] font-bold text-red-800">D</div>
-                                    <span class="text-text-main-light dark:text-text-main-dark">DOH</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-text-sec-light hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">download</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-background-light/50 dark:hover:bg-background-dark/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">Oct 21, 2023</td>
-                            <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">LTFRB-MC-23</td>
-                            <td class="px-6 py-4">
-                                <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="Adjustments to Fare Rates for Public Utility Jeepneys">
-                                    Adjustments to Fare Rates for Public Utility Jeepneys Nationwide
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-800">L</div>
-                                    <span class="text-text-main-light dark:text-text-main-dark">LTFRB</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <button class="text-text-sec-light hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-xl">download</span>
-                                </button>
-                            </td>
-                        </tr>
+                        @forelse($recentDocuments as $document)
+                            <tr class="hover:bg-background-light/50 dark:hover:bg-background-dark/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">
+                                    {{ \Carbon\Carbon::parse($document->date_filed ?? $document->created_at)->format('M d, Y') }}
+                                </td>
+                                <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">{{ $document->issuance_no ?? $document->onar_no ?? 'N/A' }}</td>
+                                <td class="px-6 py-4">
+                                    <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="{{ $document->title }}">
+                                        {{ $document->title }}
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        @if($document->agency?->logo)
+                                            <img src="{{ asset('storage/' . $document->agency->logo) }}" alt="{{ $document->agency->name }} Logo" class="w-6 h-6 rounded-full object-contain"/>
+                                        @else
+                                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-800">{{ \Illuminate\Support\Str::limit($document->agency?->name, 1, '') }}</div>
+                                        @endif
+                                        <span class="text-text-main-light dark:text-text-main-dark">{{ $document->agency?->name ?? 'Unknown Agency' }}</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    @if($document->file)
+                                        <a href="{{ asset('storage/' . $document->file) }}" target="_blank" class="text-text-sec-light hover:text-primary transition-colors" title="Download PDF">
+                                            <span class="material-symbols-outlined text-xl">download</span>
+                                        </a>
+                                    @else
+                                        <button class="text-text-sec-light hover:text-primary transition-colors opacity-50 cursor-not-allowed" title="No file available" disabled>
+                                            <span class="material-symbols-outlined text-xl">download</span>
+                                        </button>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="px-6 py-8 text-center text-text-sec-light dark:text-text-sec-dark">
+                                    No recent documents found.
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
             <div class="px-6 py-4 border-t border-border-light dark:border-border-dark flex items-center justify-center bg-background-light/30 dark:bg-background-dark/30">
-                <button class="text-primary font-bold text-sm hover:underline">View all recently filed issuances</button>
+                <a href="{{ route('search') }}" class="text-primary font-bold text-sm hover:underline">View all recently filed issuances</a>
             </div>
         </div>
     </div>
