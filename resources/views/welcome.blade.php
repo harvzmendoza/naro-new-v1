@@ -7,7 +7,7 @@
     <div class="w-full bg-card-dark relative overflow-hidden">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img alt="Legal background" class="w-full h-full object-cover opacity-20" data-alt="Abstract image of law books and scales of justice representing legal research" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPJ6DxKayZDHRPLYRl3n5o5QVWHLqbwVLeAM1wba6Dwxb3c_SzCQkWr9K9K1HnBinsnuqILGd095mDXLXczrzVqSavt7OJzWdBVAj_sOPIxFAWsL5M0feRnyevzfsWjPbr9T6yjTOMvfhKEtzKYU321w1hRYm4zj45H1zJFLY3qkl3N1BLwGYtUvkYTbTASWu03MNcLF3oMRItOYpzGaYIpkDQlfpn9Qiop7poAAs2uiM0XHHJn1LNctS3tEfl8CPMbwNJXdJLAIxP"/>
+            <img alt="Bocobo Hall - UP Law Center" class="w-full h-full object-cover opacity-30 blur-sm" src="{{ asset('images/bg.jpg') }}"/>
             <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 to-background-dark/95"></div>
         </div>
         <div class="relative z-10 max-w-[960px] mx-auto px-4 py-20 md:py-28 flex flex-col items-center text-center">
