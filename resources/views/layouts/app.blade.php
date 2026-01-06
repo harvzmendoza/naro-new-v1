@@ -29,10 +29,10 @@
                 <div class="hidden md:flex items-center gap-8">
                     <nav class="flex gap-6">
                         <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url('/') }}">Home</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Issuances</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Bulletins</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Help &amp; FAQs</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('issuances') }}">Issuances</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('bulletins') }}">Bulletins</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('about') }}">About Us</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('help') }}">Help &amp; FAQs</a>
                     </nav>
                     <div class="h-6 w-px bg-border-light dark:bg-border-dark"></div>
                     @auth
