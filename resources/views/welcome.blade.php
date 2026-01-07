@@ -67,13 +67,9 @@
                     <a class="group flex flex-col p-5 bg-white dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark hover:border-primary/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" href="{{ route('search', ['agency_id' => $agency->id]) }}">
                         <div class="flex items-start justify-between mb-4">
                             <div class="w-12 h-12 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 flex items-center justify-center">
-                                @if($agency->logo)
-                                    <img src="{{ asset('storage/' . $agency->logo) }}" alt="{{ $agency->name }} Logo" class="h-full w-full object-contain p-1"/>
-                                @else
-                                    <span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400">account_balance</span>
-                                @endif
+                                <span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400">account_balance</span>
                             </div>
-                            <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">{{ $agency->agency_code ?? \Illuminate\Support\Str::limit($agency->name, 3, '') }}</span>
+                            <!-- <span class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark text-xs font-semibold px-2 py-1 rounded">{{ $agency->agency_code ?? \Illuminate\Support\Str::limit($agency->name, 3, '') }}</span> -->
                         </div>
                         <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark group-hover:text-primary transition-colors mb-1">{{ $agency->name }}</h3>
                         <p class="text-sm text-text-sec-light dark:text-text-sec-dark mt-auto">{{ number_format($agency->documents_count) }} Issuance{{ $agency->documents_count == 1 ? '' : 's' }}</p>
@@ -105,7 +101,7 @@
                     <thead class="bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark font-semibold uppercase text-xs tracking-wider border-b border-border-light dark:border-border-dark">
                         <tr>
                             <th class="px-6 py-4 w-[120px]">Date Filed</th>
-                            <th class="px-6 py-4 w-[140px]">Bulletin No.</th>
+                            <th class="px-6 py-4 w-[140px]">ONAR No.</th>
                             <th class="px-6 py-4">Title / Subject</th>
                             <th class="px-6 py-4 w-[200px]">Issuing Agency</th>
                             <th class="px-6 py-4 w-[100px] text-right">Action</th>
@@ -117,19 +113,17 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-text-sec-light dark:text-text-sec-dark">
                                     {{ \Carbon\Carbon::parse($document->date_filed ?? $document->created_at)->format('M d, Y') }}
                                 </td>
-                                <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">{{ $document->issuance_no ?? $document->onar_no ?? 'N/A' }}</td>
+                                <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">{{ $document->onar_no ?? 'N/A' }}</td>
                                 <td class="px-6 py-4">
-                                    <a class="font-medium text-primary hover:underline line-clamp-2" href="#" title="{{ $document->title }}">
+                                    <a class="font-medium text-primary hover:underline line-clamp-1" href="#" title="{{ $document->title }}">
                                         {{ $document->title }}
                                     </a>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-2">
-                                        @if($document->agency?->logo)
-                                            <img src="{{ asset('storage/' . $document->agency->logo) }}" alt="{{ $document->agency->name }} Logo" class="w-6 h-6 rounded-full object-contain"/>
-                                        @else
-                                            <div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-800">{{ \Illuminate\Support\Str::limit($document->agency?->name, 1, '') }}</div>
-                                        @endif
+                                        <div class="w-6 h-6 rounded bg-yellow-100 flex items-center justify-center text-[10px] font-bold text-yellow-800">
+                                            {{ strtoupper(substr($document->agency?->name ?? 'U', 0, 1)) }}
+                                        </div>
                                         <span class="text-text-main-light dark:text-text-main-dark">{{ $document->agency?->name ?? 'Unknown Agency' }}</span>
                                     </div>
                                 </td>
