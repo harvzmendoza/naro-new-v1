@@ -7,8 +7,8 @@
     <div class="w-full bg-card-dark relative overflow-hidden">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img alt="Bocobo Hall - UP Law Center" class="w-full h-full object-cover opacity-30 blur-sm" src="{{ asset('images/bg.jpg') }}"/>
-            <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 to-background-dark/95"></div>
+            <img alt="Bocobo Hall - UP Law Center" class="w-full h-full object-cover opacity-10" src="{{ asset('images/bg.jpg') }}"/>
+            <div class="absolute inset-0 bg-gradient-to-b from-background-dark/20 to-background-dark/40"></div>
         </div>
         <div class="relative z-10 max-w-[960px] mx-auto px-4 py-20 md:py-28 flex flex-col items-center text-center">
             <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
