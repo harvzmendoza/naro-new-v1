@@ -358,7 +358,7 @@
                                         {{ $typeName }}
                                     </span>
                                 </div>
-                                <a class="text-lg md:text-xl font-bold leading-tight text-text-main-light hover:text-primary dark:text-white transition-colors" href="#">
+                                <a href="{{ route('documents.show', $document) }}" class="text-lg md:text-xl font-bold leading-tight text-text-main-light hover:text-primary dark:text-white transition-colors">
                                     {{ $document->title }}
                                 </a>
                             </div>
@@ -375,9 +375,9 @@
                             </p>
                         @endif
                         <div class="flex items-center gap-4 pt-2 border-t border-dashed border-border-light dark:border-border-dark mt-1">
-                            <button class="flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+                            <a href="{{ route('documents.show', $document) }}" class="flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
                                 <span class="material-symbols-outlined text-[18px]">visibility</span> View Details
-                            </button>
+                            </a>
                             @if($document->file)
                                 <a href="{{ asset('storage/' . $document->file) }}" target="_blank" class="flex items-center gap-1.5 text-sm font-medium text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-white transition-colors">
                                     <span class="material-symbols-outlined text-[18px]">download</span> Download PDF

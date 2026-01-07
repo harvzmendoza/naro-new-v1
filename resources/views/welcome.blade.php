@@ -115,7 +115,7 @@
                                 </td>
                                 <td class="px-6 py-4 font-mono text-xs text-text-sec-light dark:text-text-sec-dark">{{ $document->onar_no ?? 'N/A' }}</td>
                                 <td class="px-6 py-4">
-                                    <a class="font-medium text-primary hover:underline line-clamp-1" href="#" title="{{ $document->title }}">
+                                    <a class="font-medium text-primary hover:underline" href="{{ route('documents.show', $document) }}" title="{{ $document->title }}">
                                         {{ $document->title }}
                                     </a>
                                 </td>

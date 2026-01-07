@@ -6,6 +6,7 @@ use App\Models\Agency;
 use App\Models\Document;
 use App\Models\IssuanceType;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
@@ -152,6 +153,24 @@ class WelcomeController extends Controller
             'year' => $year,
             'sort' => $sort,
             'availableYears' => $availableYears,
+        ]);
+    }
+
+    public function show(Document $document): View
+    {
+        $document->load(['agency', 'issuanceType']);
+
+        // Get related documents from the same agency
+        $relatedDocuments = Document::with(['agency', 'issuanceType'])
+            ->where('agency_id', $document->agency_id)
+            ->where('id', '!=', $document->id)
+            ->orderByRaw('COALESCE(date_filed, created_at) DESC')
+            ->limit(5)
+            ->get();
+
+        return view('documents.show', [
+            'document' => $document,
+            'relatedDocuments' => $relatedDocuments,
         ]);
     }
 }
