@@ -157,7 +157,7 @@
                         {{ number_format($agency->documents_count) }} Issuance{{ $agency->documents_count == 1 ? '' : 's' }}
                     </span>
                     <a 
-                        class="text-sm font-semibold text-primary hover:text-blue-700 dark:hover:text-blue-400 flex items-center gap-1" 
+                        class="text-sm font-semibold text-primary flex items-center gap-1" 
                         href="{{ route('search', ['agency_id' => $agency->id]) }}"
                     >
                         View Docs <span class="material-symbols-outlined text-sm">arrow_forward</span>

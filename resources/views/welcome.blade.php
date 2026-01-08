@@ -9,7 +9,15 @@
         <div class="absolute inset-0 z-0" style='background-image: linear-gradient(rgba(128, 0, 32, 0.85), rgba(16, 22, 34, 0.9))'>
             <img alt="Bocobo Hall - UP Law Center" class="w-full h-full object-cover opacity-10" src="{{ asset('images/bg.jpg') }}"/>
         </div>
+        <!-- Live Indicator -->
         <div class="relative z-10 max-w-[960px] mx-auto px-4 py-20 md:py-28 flex flex-col items-center text-center">
+            <div class="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 mb-2">
+                <span class="relative inline-flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span class="text-xs text-white/90 font-medium">Updated daily with new issuances</span>
+            </div>
             <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
                 Search the National Administrative Register
             </h1>
