@@ -13,7 +13,7 @@ class BulletinController extends Controller
     {
         $sections = Section::withCount('documents')
             ->orderByDesc('volume_name')
-            ->orderBy('book_name')
+            ->orderBy('id', 'asc')
             ->get();
 
         $sectionsByVolume = $sections->groupBy('volume_name');

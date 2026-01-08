@@ -12,11 +12,11 @@
             @if($currentSection)
                 <span class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium leading-normal">/</span>
                 <span class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium leading-normal hover:text-primary">
-                    Volume {{ $currentSection->volume_name }}
+                    {{ $currentSection->volume_name }}
                 </span>
                 <span class="text-text-sec-light dark:text-text-sec-dark text-sm font-medium leading-normal">/</span>
                 <span class="text-text-main-light dark:text-text-main-dark text-sm font-medium leading-normal">
-                    Book {{ $currentSection->book_name }}
+                    No. {{ $currentSection->book_name }}
                 </span>
             @endif
         </div>
@@ -57,7 +57,7 @@
                                         <span class="material-symbols-outlined text-[20px] text-gray-400 group-open:text-primary">
                                             {{ $isCurrentVolume ? 'folder_open' : 'folder' }}
                                         </span>
-                                        Volume {{ $volumeName }}
+                                        {{ $volumeName }}
                                     </span>
                                     <span class="material-symbols-outlined text-[20px] text-gray-400 transition-transform group-open:rotate-180">expand_more</span>
                                 </summary>
@@ -77,10 +77,17 @@
                                             <span class="material-symbols-outlined text-[18px]">
                                                 {{ $isActive ? 'book_2' : 'book' }}
                                             </span>
-                                            Book {{ $section->book_name }}
-                                            @if($section->issuance_from && $section->issuance_to)
-                                                <span class="text-xs text-text-sec-light dark:text-text-sec-dark">
-                                                    ({{ $section->issuance_from }} – {{ $section->issuance_to }})
+                                            <span class="flex-1">
+                                                No. {{ $section->book_name }}
+                                                @if($section->issuance_from && $section->issuance_to)
+                                                    <span class="block text-xs text-text-sec-light dark:text-text-sec-dark mt-0.5">
+                                                        {{ \Carbon\Carbon::parse($section->issuance_from)->format('M d, Y') }} – {{ \Carbon\Carbon::parse($section->issuance_to)->format('M d, Y') }}
+                                                    </span>
+                                                @endif
+                                            </span>
+                                            @if($section->documents_count > 0)
+                                                <span class="inline-flex items-center justify-center min-w-[24px] h-5 px-1.5 rounded-full bg-gray-100 dark:bg-gray-700 text-xs font-semibold text-text-sec-light dark:text-text-sec-dark">
+                                                    {{ $section->documents_count }}
                                                 </span>
                                             @endif
                                         </a>
@@ -100,7 +107,7 @@
                         <span class="material-symbols-outlined text-[18px]">info</span>
                         About Volumes
                     </h3>
-                    <p class="text-xs text-text-sec-light dark:text-blue-200 leading-relaxed">
+                    <p class="text-xs text-text-sec-light dark:blue-200 leading-relaxed">
                         The ONAR Bulletin is published periodically. Each Volume represents a collection of books,
                         and each Book represents a portion of that volume containing all filed administrative issuances.
                     </p>
@@ -112,16 +119,16 @@
                 @if($currentSection)
                     {{-- Bulletin summary card --}}
                     <div class="flex flex-col md:flex-row gap-6 p-6 bg-white dark:bg-card-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark">
-                        <div class="shrink-0 flex items-center justify-center w-24 h-32 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg shadow-lg text-white flex-col">
-                            <span class="text-xs font-medium opacity-80">VOL {{ $currentSection->volume_name }}</span>
-                            <span class="text-3xl font-bold">BK {{ $currentSection->book_name }}</span>
+                        <div class="shrink-0 flex items-center justify-center w-24 h-32 bg-gradient-to-br from-red-900 to-red-950 rounded-lg shadow-lg text-white flex-col">
+                            <span class="text-xs font-medium opacity-80"> {{ $currentSection->volume_name }}</span>
+                            <span class="text-3xl font-bold">No. {{ $currentSection->book_name }}</span>
                         </div>
 
                         <div class="flex flex-col flex-1 gap-4">
                             <div class="flex flex-col gap-1">
                                 <div class="flex flex-wrap items-center gap-3">
                                     <h2 class="text-2xl font-bold text-text-main-light dark:text-white">
-                                        Volume {{ $currentSection->volume_name }}, Book {{ $currentSection->book_name }}
+                                        {{ $currentSection->volume_name }}, No. {{ $currentSection->book_name }}
                                     </h2>
                                     <span class="inline-flex items-center rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-semibold text-green-700 dark:bg-green-900/40 dark:text-green-300 border border-green-200 dark:border-green-800">
                                         <span class="material-symbols-outlined text-[18px] mr-1">check_circle</span>
@@ -132,7 +139,7 @@
                                     <p class="text-text-sec-light dark:text-text-sec-dark text-sm">
                                         Covering period:
                                         <span class="font-bold text-text-main-light dark:text-white">
-                                            {{ $currentSection->issuance_from }} – {{ $currentSection->issuance_to }}
+                                            {{ \Carbon\Carbon::parse($currentSection->issuance_from)->format('F d, Y') }} – {{ \Carbon\Carbon::parse($currentSection->issuance_to)->format('F d, Y') }}
                                         </span>
                                     </p>
                                 @endif
@@ -147,14 +154,14 @@
                                 {{-- Placeholder actions; wire up when PDF or search-in-book is available --}}
                                 <button type="button" class="flex items-center gap-2 px-4 py-2 bg-text-main-light dark:bg-white text-white dark:text-text-main-light rounded-lg text-sm font-bold hover:opacity-90 transition-opacity">
                                     <span class="material-symbols-outlined text-[18px]">download</span>
-                                    Download Full Book PDF
+                                    Download Bulletin PDF
                                 </button>
                                 <a
                                     href="{{ route('search', ['section_id' => $currentSection->id]) }}"
                                     class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-background-dark border border-border-light dark:border-border-dark text-text-main-light dark:text-white rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-background-dark/80 transition-colors"
                                 >
                                     <span class="material-symbols-outlined text-[18px]">search</span>
-                                    Search in Book
+                                    Search in Issuances
                                 </a>
                             </div>
                         </div>

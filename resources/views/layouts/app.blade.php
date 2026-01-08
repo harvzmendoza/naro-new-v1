@@ -41,7 +41,7 @@
                         </a>
                     @else
                         <a href="#" class="bg-primary hover:opacity-90 text-white text-sm font-bold py-2 px-5 rounded-lg transition-colors shadow-sm">
-                            Login / Register
+                            Newsletters
                         </a>
                     @endauth
                 </div>
