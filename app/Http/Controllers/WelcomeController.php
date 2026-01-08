@@ -173,4 +173,57 @@ class WelcomeController extends Controller
             'relatedDocuments' => $relatedDocuments,
         ]);
     }
+
+    public function agencies(Request $request): View
+    {
+        $query = $request->get('q', '');
+        $category = $request->get('category', '');
+        $letter = $request->get('letter', '');
+        $sort = $request->get('sort', 'name_az');
+        $perPage = 12;
+
+        // Build query
+        $agenciesQuery = Agency::withCount('documents');
+
+        // Search by name or code
+        if ($query) {
+            $agenciesQuery->where(function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%")
+                    ->orWhere('agency_code', 'like', "%{$query}%");
+            });
+        }
+
+        // Filter by first letter
+        if ($letter && $letter !== 'all') {
+            $agenciesQuery->where('name', 'like', "{$letter}%");
+        }
+
+        // Sort
+        switch ($sort) {
+            case 'issuance_count':
+                $agenciesQuery->orderBy('documents_count', 'desc');
+                break;
+            case 'recently_updated':
+                $agenciesQuery->orderBy('updated_at', 'desc');
+                break;
+            default: // name_az
+                $agenciesQuery->orderBy('name', 'asc');
+                break;
+        }
+
+        // Paginate
+        $agencies = $agenciesQuery->paginate($perPage)->withQueryString();
+
+        // Get total count for display
+        $totalAgencies = Agency::count();
+
+        return view('agencies', [
+            'agencies' => $agencies,
+            'totalAgencies' => $totalAgencies,
+            'query' => $query,
+            'category' => $category,
+            'letter' => $letter,
+            'sort' => $sort,
+        ]);
+    }
 }

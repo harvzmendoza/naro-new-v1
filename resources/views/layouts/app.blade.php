@@ -29,6 +29,7 @@
                 <div class="hidden md:flex items-center gap-8">
                     <nav class="flex gap-6">
                         <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url('/') }}">Home</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('agencies') }}">Agency Directory</a>
                         <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('search') }}">Issuances</a>
                         <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('bulletins') }}">Bulletins</a>
                         <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('about') }}">About Us</a>
@@ -76,9 +77,9 @@
                 <div>
                     <h4 class="font-bold text-text-main-light dark:text-text-main-dark mb-4 text-sm uppercase tracking-wide">Resources</h4>
                     <ul class="space-y-2 text-sm text-text-sec-light dark:text-text-sec-dark">
-                        <li><a class="hover:text-primary" href="#">Search Register</a></li>
-                        <li><a class="hover:text-primary" href="#">Agency Directory</a></li>
-                        <li><a class="hover:text-primary" href="#">Help &amp; FAQs</a></li>
+                        <li><a class="hover:text-primary" href="{{ route('search') }}">Search Register</a></li>
+                        <li><a class="hover:text-primary" href="{{ route('agencies') }}">Agency Directory</a></li>
+                        <li><a class="hover:text-primary" href="{{ route('help') }}">Help &amp; FAQs</a></li>
                     </ul>
                 </div>
                 <div>

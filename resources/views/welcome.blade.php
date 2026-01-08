@@ -54,7 +54,7 @@
                 <h2 class="text-2xl font-bold text-text-main-light dark:text-text-main-dark tracking-tight">Issuing Agencies</h2>
                 <p class="text-text-sec-light dark:text-text-sec-dark mt-1">Browse documents by government department or bureau.</p>
             </div>
-            <a class="hidden md:flex items-center text-primary font-bold text-sm hover:underline gap-1" href="#">
+            <a class="hidden md:flex items-center text-primary font-bold text-sm hover:underline gap-1" href="{{ route('agencies') }}">
                 View all agencies <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
@@ -77,7 +77,7 @@
             </div>
         @endif
         <div class="mt-6 md:hidden">
-            <a class="flex items-center justify-center w-full py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-primary font-bold text-sm" href="#">
+            <a class="flex items-center justify-center w-full py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-primary font-bold text-sm" href="{{ route('agencies') }}">
                 View all agencies
             </a>
         </div>
