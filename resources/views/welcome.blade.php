@@ -6,9 +6,8 @@
     <!-- Hero Section -->
     <div class="w-full bg-card-dark relative overflow-hidden">
         <!-- Background Image with Overlay -->
-        <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 z-0" style='background-image: linear-gradient(rgba(128, 0, 32, 0.85), rgba(16, 22, 34, 0.9))'>
             <img alt="Bocobo Hall - UP Law Center" class="w-full h-full object-cover opacity-10" src="{{ asset('images/bg.jpg') }}"/>
-            <div class="absolute inset-0 bg-gradient-to-b from-background-dark/20 to-background-dark/40"></div>
         </div>
         <div class="relative z-10 max-w-[960px] mx-auto px-4 py-20 md:py-28 flex flex-col items-center text-center">
             <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
