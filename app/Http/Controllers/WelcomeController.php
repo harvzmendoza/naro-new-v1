@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Agency;
 use App\Models\Document;
 use App\Models\IssuanceType;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class WelcomeController extends Controller
@@ -28,6 +30,47 @@ class WelcomeController extends Controller
             ->limit(5)
             ->get();
 
+        // Get latest bulletin volumes from sections
+        $latestVolumes = Section::select(
+            'id',
+            'volume_name',
+            'book_name',
+            DB::raw('MIN(issuance_from) as period_start'),
+            DB::raw('MAX(issuance_to) as period_end'),
+            DB::raw('COUNT(DISTINCT id) as section_count')
+        )
+            ->whereNotNull('volume_name')
+            ->whereNotNull('book_name')
+            ->groupBy('id', 'volume_name', 'book_name')
+            ->orderByRaw('CAST(SUBSTRING_INDEX(volume_name, " ", -1) AS UNSIGNED) DESC')
+            ->orderByRaw('CAST(SUBSTRING_INDEX(book_name, " ", -1) AS UNSIGNED) DESC')
+            ->limit(4)
+            ->get()
+            ->map(function ($section) {
+                // Get document count for this volume/book combination
+                $sectionIds = Section::where('volume_name', $section->volume_name)
+                    ->where('book_name', $section->book_name)
+                    ->pluck('id');
+
+                $docCount = Document::whereIn('section_id', $sectionIds)->count();
+
+                return [
+                    'id' => $section->id,
+                    'volume_name' => $section->volume_name,
+                    'book_name' => $section->book_name,
+                    'period_start' => $section->period_start,
+                    'period_end' => $section->period_end,
+                    'document_count' => $docCount,
+                ];
+            });
+
+        // Get documents for AI summaries (recent documents with issuance numbers)
+        $aiSummaries = Document::with(['agency', 'issuanceType'])
+            ->whereNotNull('issuance_no')
+            ->orderByRaw('COALESCE(date_filed, created_at) DESC')
+            ->limit(3)
+            ->get();
+
         // Get available years for dropdown
         $availableYears = Document::selectRaw('DISTINCT YEAR(COALESCE(date_filed, created_at)) as year')
             ->whereNotNull('date_filed')
@@ -41,6 +84,8 @@ class WelcomeController extends Controller
             'agencies' => $agencies,
             'recentDocuments' => $recentDocuments,
             'availableYears' => $availableYears,
+            'latestVolumes' => $latestVolumes,
+            'aiSummaries' => $aiSummaries,
         ]);
     }
 

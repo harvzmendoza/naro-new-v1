@@ -28,8 +28,8 @@
                         </div>
                         <div class="flex flex-wrap gap-4">
                             <a
-                                href="{{ route('issuances') }}"
-                                class="flex items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold tracking-[0.015em] hover:bg-blue-700 transition-colors shadow-sm"
+                                href="{{ route('search') }}"
+                                class="flex items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold tracking-[0.015em] shadow-sm"
                             >
                                 <span class="truncate">View Issuances</span>
                             </a>
@@ -183,7 +183,8 @@
                         </div>
                         <a
                             class="flex items-center gap-2 text-primary font-bold text-sm hover:underline mt-2"
-                            href="#"
+                            href="https://law.upd.edu.ph/onar/"
+                            target="_blank"
                         >
                             <span>Visit Official ONAR Site</span>
                             <span class="material-symbols-outlined text-sm">open_in_new</span>

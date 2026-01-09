@@ -41,8 +41,8 @@
                             Dashboard
                         </a>
                     @else
-                        <a href="#" class="bg-primary hover:opacity-90 text-white text-sm font-bold py-2 px-5 rounded-lg transition-colors shadow-sm">
-                            Newsletters
+                        <a href="{{ route('search') }}" class="bg-primary hover:opacity-90 text-white text-sm font-bold py-2 px-5 rounded-lg transition-colors shadow-sm">
+                            Start Searching
                         </a>
                     @endauth
                 </div>
@@ -77,9 +77,10 @@
                 <div>
                     <h4 class="font-bold text-text-main-light dark:text-text-main-dark mb-4 text-sm uppercase tracking-wide">Resources</h4>
                     <ul class="space-y-2 text-sm text-text-sec-light dark:text-text-sec-dark">
-                        <li><a class="hover:text-primary" href="{{ route('search') }}">Search Register</a></li>
-                        <li><a class="hover:text-primary" href="{{ route('agencies') }}">Agency Directory</a></li>
-                        <li><a class="hover:text-primary" href="{{ route('help') }}">Help &amp; FAQs</a></li>
+                        <li><a class="hover:text-primary" href="#">Search Register</a></li>
+                        <li><a class="hover:text-primary" href="#">Browse Bulletins</a></li>
+                        <li><a class="hover:text-primary" href="#">Agency Directory</a></li>
+                        <li><a class="hover:text-primary" href="#">AI Summaries</a></li>
                     </ul>
                 </div>
                 <div>
@@ -91,23 +92,26 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-text-main-light dark:text-text-main-dark mb-4 text-sm uppercase tracking-wide">Connect</h4>
-                    <div class="flex gap-4">
-                        <a class="w-8 h-8 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center text-text-sec-light dark:text-text-sec-dark hover:bg-primary hover:text-white transition-colors" href="#">
-                            <!-- Social Icon Placeholder -->
-                            <span class="text-xs font-bold">f</span>
-                        </a>
-                        <a class="w-8 h-8 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center text-text-sec-light dark:text-text-sec-dark hover:bg-primary hover:text-white transition-colors" href="#">
-                            <!-- Social Icon Placeholder -->
-                            <span class="text-xs font-bold">t</span>
-                        </a>
-                    </div>
+                    <h4 class="font-bold text-text-main-light dark:text-text-main-dark mb-4 text-sm uppercase tracking-wide">Support</h4>
+                    <ul class="space-y-2 text-sm text-text-sec-light dark:text-text-sec-dark">
+                        <li><a class="hover:text-primary" href="#">About Us</a></li>
+                        <li><a class="hover:text-primary" href="#">Help &amp; FAQs</a></li>
+                        <li><a class="hover:text-primary" href="#">Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="border-t border-border-light dark:border-border-dark pt-8 text-center md:text-left">
+            <div class="border-t border-border-light dark:border-border-dark pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
                 <p class="text-xs text-text-sec-light dark:text-text-sec-dark">
-                    © 2024 University of the Philippines Law Center. All rights reserved.
+                    © 2025 University of the Philippines Law Center ONAR. All rights reserved.
                 </p>
+                <div class="flex gap-4">
+                    <a class="w-8 h-8 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center text-text-sec-light dark:text-text-sec-dark hover:bg-primary hover:text-white transition-colors" href="#">
+                        <span class="text-xs font-bold">f</span>
+                    </a>
+                    <a class="w-8 h-8 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center text-text-sec-light dark:text-text-sec-dark hover:bg-primary hover:text-white transition-colors" href="#">
+                        <span class="text-xs font-bold">t</span>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>

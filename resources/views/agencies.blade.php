@@ -173,58 +173,39 @@
 
     <!-- Pagination -->
     @if($agencies->hasPages())
-        <div class="flex justify-center mt-6">
-            <nav class="flex items-center gap-1 bg-white dark:bg-card-dark p-2 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800">
-                @if($agencies->onFirstPage())
-                    <span class="w-9 h-9 flex items-center justify-center rounded-md text-text-sec-light dark:text-gray-400 opacity-50 cursor-not-allowed">
-                        <span class="material-symbols-outlined text-sm">chevron_left</span>
-                    </span>
-                @else
-                    <a 
-                        href="{{ $agencies->previousPageUrl() }}" 
-                        class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-background-light dark:hover:bg-gray-700 text-text-sec-light dark:text-gray-400 transition-colors"
-                    >
-                        <span class="material-symbols-outlined text-sm">chevron_left</span>
-                    </a>
-                @endif
+        <div class="flex items-center justify-center gap-2 mt-8 pb-10">
+            @if($agencies->onFirstPage())
+                <button class="flex items-center justify-center size-10 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:bg-background-light dark:hover:bg-background-dark disabled:opacity-50" disabled>
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+            @else
+                <a href="{{ $agencies->previousPageUrl() }}" class="flex items-center justify-center size-10 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </a>
+            @endif
 
-                @foreach($agencies->getUrlRange(1, min(5, $agencies->lastPage())) as $page => $url)
-                    @if($page == $agencies->currentPage())
-                        <span class="w-9 h-9 flex items-center justify-center rounded-md bg-primary text-white font-medium shadow-sm">
-                            {{ $page }}
-                        </span>
-                    @else
-                        <a 
-                            href="{{ $url }}" 
-                            class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-background-light dark:hover:bg-gray-700 text-text-sec-light dark:text-gray-400 font-medium transition-colors"
-                        >
-                            {{ $page }}
-                        </a>
-                    @endif
-                @endforeach
-
-                @if($agencies->hasMorePages())
-                    @if($agencies->lastPage() > 5)
-                        <span class="w-9 h-9 flex items-center justify-center text-text-sec-light dark:text-gray-500">...</span>
-                        <a 
-                            href="{{ $agencies->url($agencies->lastPage()) }}" 
-                            class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-background-light dark:hover:bg-gray-700 text-text-sec-light dark:text-gray-400 font-medium transition-colors"
-                        >
-                            {{ $agencies->lastPage() }}
-                        </a>
-                    @endif
-                    <a 
-                        href="{{ $agencies->nextPageUrl() }}" 
-                        class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-background-light dark:hover:bg-gray-700 text-text-sec-light dark:text-gray-400 transition-colors"
-                    >
-                        <span class="material-symbols-outlined text-sm">chevron_right</span>
-                    </a>
+            @foreach($agencies->getUrlRange(1, min(5, $agencies->lastPage())) as $page => $url)
+                @if($page == $agencies->currentPage())
+                    <span class="flex items-center justify-center size-10 rounded-lg bg-primary text-white font-medium shadow-md">{{ $page }}</span>
                 @else
-                    <span class="w-9 h-9 flex items-center justify-center rounded-md text-text-sec-light dark:text-gray-400 opacity-50 cursor-not-allowed">
-                        <span class="material-symbols-outlined text-sm">chevron_right</span>
-                    </span>
+                    <a href="{{ $url }}" class="flex items-center justify-center size-10 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:bg-background-light dark:hover:bg-background-dark font-medium transition-colors">{{ $page }}</a>
                 @endif
-            </nav>
+            @endforeach
+
+            @if($agencies->lastPage() > 5)
+                <span class="text-text-sec-light dark:text-text-sec-dark px-2">...</span>
+                <a href="{{ $agencies->url($agencies->lastPage()) }}" class="flex items-center justify-center size-10 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:bg-background-light dark:hover:bg-background-dark font-medium transition-colors">{{ $agencies->lastPage() }}</a>
+            @endif
+
+            @if($agencies->hasMorePages())
+                <a href="{{ $agencies->nextPageUrl() }}" class="flex items-center justify-center size-10 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+            @else
+                <button class="flex items-center justify-center size-10 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:bg-background-light dark:hover:bg-background-dark disabled:opacity-50" disabled>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            @endif
         </div>
     @endif
 </div>

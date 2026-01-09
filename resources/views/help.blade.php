@@ -71,7 +71,7 @@
                 <div class="sticky top-24">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark mb-4 px-2">Categories</h3>
                     <nav class="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-2 lg:pb-0">
-                        <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-bold text-sm whitespace-nowrap border-l-4 border-primary" href="#getting-started">
+                        <a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-background-light dark:hover:bg-card-dark/70 text-text-sec-light dark:text-text-sec-dark font-medium text-sm whitespace-nowrap transition-colors border-l-4 border-transparent" href="#getting-started">
                             <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
                             Getting Started
                         </a>
@@ -330,4 +330,35 @@
             </div>
         </div>
     </main>
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('aside nav a');
+        
+        function setActiveLink() {
+            const hash = window.location.hash || '#getting-started';
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.remove('hover:bg-background-light', 'dark:hover:bg-card-dark/70', 'text-text-sec-light', 'dark:text-text-sec-dark', 'font-medium', 'border-transparent');
+                    link.classList.add('bg-primary/10', 'text-primary', 'font-bold', 'border-primary');
+                } else {
+                    link.classList.remove('bg-primary/10', 'text-primary', 'font-bold', 'border-primary');
+                    link.classList.add('hover:bg-background-light', 'dark:hover:bg-card-dark/70', 'text-text-sec-light', 'dark:text-text-sec-dark', 'font-medium', 'border-transparent');
+                }
+            });
+        }
+        
+        setActiveLink();
+        
+        window.addEventListener('hashchange', setActiveLink);
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                setTimeout(setActiveLink, 10);
+            });
+        });
+    });
+</script>
+@endpush
 @endsection
