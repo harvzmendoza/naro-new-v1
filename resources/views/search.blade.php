@@ -30,10 +30,20 @@
                             type="text" 
                             name="q" 
                             value="{{ $query }}" 
-                            class="w-full rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-background-dark text-text-main-light dark:text-white h-12 px-4 placeholder:text-text-sec-light focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" 
+                            class="w-full h-12 px-4 pr-12 rounded-lg 
+                                border border-border-light dark:border-border-dark 
+                                bg-white dark:bg-background-dark 
+                                text-text-main-light dark:text-white 
+                                placeholder:text-text-sec-light 
+                                focus:border-primary focus:ring-1 focus:ring-primary 
+                                outline-none transition-all" 
                             placeholder="e.g., Department Order regarding PhilHealth"
                         />
-                        <span class="material-symbols-outlined absolute right-4 top-3 text-text-sec-light pointer-events-none">search</span>
+
+                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 
+                                    text-text-sec-light pointer-events-none">
+                            search
+                        </span>
                     </div>
                 </label>
                 <label class="flex flex-col w-full md:flex-1">
@@ -347,7 +357,7 @@
                         }
                     @endphp
                     <div class="group flex flex-col gap-4 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/50 dark:hover:border-primary/30">
-                        <div class="flex items-start justify-between gap-4">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                             <div class="flex flex-col gap-2 flex-1">
                                 <div class="flex flex-wrap gap-2 items-center">
                                     <span class="inline-flex items-center rounded bg-background-light dark:bg-background-dark px-2 py-0.5 text-xs font-semibold text-text-main-light dark:text-text-main-dark">
@@ -358,13 +368,13 @@
                                         {{ $typeName }}
                                     </span>
                                 </div>
-                                <a href="{{ route('documents.show', $document) }}" class="text-lg md:text-xl font-bold leading-tight text-text-main-light hover:text-primary dark:text-white transition-colors">
+                                <a href="{{ route('documents.show', $document) }}" class="text-lg md:text-xl font-bold leading-tight text-text-main-light hover:text-primary dark:text-white transition-colors w-full">
                                     {{ $document->title }}
                                 </a>
                             </div>
-                            <div class="shrink-0 flex flex-col items-end gap-1">
-                                <span class="flex items-center text-sm font-medium text-text-sec-light dark:text-text-sec-dark">
-                                    <span class="material-symbols-outlined text-[16px] mr-1">calendar_today</span>
+                            <div class="shrink-0 flex flex-col items-start md:items-end gap-1">
+                                <span class="flex items-center text-xs sm:text-sm font-medium text-text-sec-light dark:text-text-sec-dark">
+                                    <span class="material-symbols-outlined text-[14px] sm:text-[16px] mr-1">calendar_today</span>
                                     {{ $dateFiled }}
                                 </span>
                             </div>
@@ -376,15 +386,15 @@
                         @endif
                         <div class="flex items-center gap-4 pt-2 border-t border-dashed border-border-light dark:border-border-dark mt-1">
                             <a href="{{ route('documents.show', $document) }}" class="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">visibility</span> View Details
+                                <span class="material-symbols-outlined text-[18px]">visibility</span> <span class="hidden sm:inline">View Details</span>
                             </a>
                             @if($document->file)
                                 <a href="{{ asset('storage/' . $document->file) }}" target="_blank" class="flex items-center gap-1.5 text-sm font-medium text-text-sec-light hover:text-text-main-light dark:text-text-sec-dark dark:hover:text-white transition-colors">
-                                    <span class="material-symbols-outlined text-[18px]">download</span> Download PDF
+                                    <span class="material-symbols-outlined text-[18px]">download</span> <span class="hidden sm:inline">Download PDF</span>
                                 </a>
                             @else
                                 <button class="flex items-center gap-1.5 text-sm font-medium text-text-sec-light dark:text-text-sec-dark opacity-50 cursor-not-allowed" disabled>
-                                    <span class="material-symbols-outlined text-[18px]">download</span> Download PDF
+                                    <span class="material-symbols-outlined text-[18px]">download</span> <span class="hidden sm:inline">Download PDF</span>
                                 </button>
                             @endif
                             <span class="text-xs text-text-sec-light dark:text-text-sec-dark ml-auto">Ref: {{ $issuanceNo }}</span>

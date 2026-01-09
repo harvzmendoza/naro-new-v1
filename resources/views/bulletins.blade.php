@@ -277,8 +277,43 @@
 
                     {{-- Pagination --}}
                     @if($documents->hasPages())
-                        <div class="flex items-center justify-center gap-2 mt-8 pb-6">
-                            {{ $documents->onEachSide(1)->links() }}
+                        <div class="flex items-center justify-center mt-8 pb-6">
+                            <div class="flex items-center gap-2">
+                                {{-- Previous Button --}}
+                                @if($documents->onFirstPage())
+                                    <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark cursor-not-allowed">
+                                        <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+                                    </span>
+                                @else
+                                    <a href="{{ $documents->previousPageUrl() }}" class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:border-primary hover:text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+                                    </a>
+                                @endif
+
+                                {{-- Page Numbers --}}
+                                @foreach($documents->getUrlRange(1, $documents->lastPage()) as $page => $url)
+                                    @if($page == $documents->currentPage())
+                                        <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-medium">
+                                            {{ $page }}
+                                        </span>
+                                    @else
+                                        <a href="{{ $url }}" class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:border-primary hover:text-primary transition-colors">
+                                            {{ $page }}
+                                        </a>
+                                    @endif
+                                @endforeach
+
+                                {{-- Next Button --}}
+                                @if($documents->hasMorePages())
+                                    <a href="{{ $documents->nextPageUrl() }}" class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-card-dark text-text-main-light dark:text-white hover:border-primary hover:text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                                    </a>
+                                @else
+                                    <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-sec-light dark:text-text-sec-dark cursor-not-allowed">
+                                        <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                     @endif
                 @else
