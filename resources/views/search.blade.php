@@ -375,7 +375,7 @@
                             </p>
                         @endif
                         <div class="flex items-center gap-4 pt-2 border-t border-dashed border-border-light dark:border-border-dark mt-1">
-                            <a href="{{ route('documents.show', $document) }}" class="flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+                            <a href="{{ route('documents.show', $document) }}" class="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors">
                                 <span class="material-symbols-outlined text-[18px]">visibility</span> View Details
                             </a>
                             @if($document->file)

@@ -28,12 +28,12 @@
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center gap-8">
                     <nav class="flex gap-6">
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url('/') }}">Home</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('agencies') }}">Agency Directory</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('search') }}">Issuances</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('bulletins') }}">Bulletins</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('about') }}">About Us</a>
-                        <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('help') }}">Help &amp; FAQs</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors {{ request()->is('/') ? 'text-primary' : '' }}" href="{{ url('/') }}">Home</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors {{ request()->routeIs('agencies') ? 'text-primary' : '' }}" href="{{ route('agencies') }}">Agency Directory</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors {{ request()->routeIs('search') ? 'text-primary' : '' }}" href="{{ route('search') }}">Issuances</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors {{ request()->routeIs('bulletins') ? 'text-primary' : '' }}" href="{{ route('bulletins') }}">Bulletins</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors {{ request()->routeIs('about') ? 'text-primary' : '' }}" href="{{ route('about') }}">About Us</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors {{ request()->routeIs('help') ? 'text-primary' : '' }}" href="{{ route('help') }}">Help &amp; FAQs</a>
                     </nav>
                     <div class="h-6 w-px bg-border-light dark:bg-border-dark"></div>
                     @auth
