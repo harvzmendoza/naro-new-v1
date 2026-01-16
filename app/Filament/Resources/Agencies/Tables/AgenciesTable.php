@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Agencies\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -14,18 +15,18 @@ class AgenciesTable
     {
         return $table
             ->columns([
+                ImageColumn::make('logo')
+                    ->square()
+                    ->size(40),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('agency_code')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('logo')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -39,7 +40,7 @@ class AgenciesTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    // DeleteBulkAction::make(),
                 ]),
             ]);
     }

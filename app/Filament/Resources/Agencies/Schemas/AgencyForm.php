@@ -18,9 +18,16 @@ class AgencyForm
                 TextInput::make('agency_code')
                     ->maxLength(255),
                 FileUpload::make('logo')
+                    ->required()
                     ->image()
-                    ->directory('agencies/logos')
-                    ->visibility('public'),
+                    ->maxSize(10048)
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        null,
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ]),
             ]);
     }
 }
