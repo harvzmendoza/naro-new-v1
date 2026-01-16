@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Support\Colors\Color;
 use Illuminate\Contracts\View\View;
+use Filament\Actions\ViewAction;
 use App\Models\Section;
 
 class SectionsTable
@@ -68,6 +69,13 @@ class SectionsTable
                 //
             ])
             ->recordActions([
+                Action::make('print')
+                    ->icon('heroicon-m-printer')
+                    ->label('Bulletin')
+                    ->color('info')
+                    ->url(fn (Section $record) => route('pdf', $record->hash))
+                    ->openUrlInNewTab(), 
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([
