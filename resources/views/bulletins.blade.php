@@ -211,7 +211,19 @@
                                             @endif
 
                                             @if($document->issuanceType)
-                                                <span class="inline-flex items-center rounded bg-blue-50 px-2 py-0.5 text-xs font-semibold text-primary dark:bg-blue-900/40 dark:text-blue-300">
+                                                @php
+                                                    $colors = [
+                                                        ['bg' => 'bg-blue-50', 'text' => 'text-blue-700', 'dark-bg' => 'dark:bg-blue-900/40', 'dark-text' => 'dark:text-blue-300'],
+                                                        ['bg' => 'bg-green-50', 'text' => 'text-green-700', 'dark-bg' => 'dark:bg-green-900/40', 'dark-text' => 'dark:text-green-300'],
+                                                        ['bg' => 'bg-purple-50', 'text' => 'text-purple-700', 'dark-bg' => 'dark:bg-purple-900/40', 'dark-text' => 'dark:text-purple-300'],
+                                                        ['bg' => 'bg-orange-50', 'text' => 'text-orange-700', 'dark-bg' => 'dark:bg-orange-900/40', 'dark-text' => 'dark:text-orange-300'],
+                                                        ['bg' => 'bg-pink-50', 'text' => 'text-pink-700', 'dark-bg' => 'dark:bg-pink-900/40', 'dark-text' => 'dark:text-pink-300'],
+                                                        ['bg' => 'bg-indigo-50', 'text' => 'text-indigo-700', 'dark-bg' => 'dark:bg-indigo-900/40', 'dark-text' => 'dark:text-indigo-300'],
+                                                    ];
+                                                    $colorIndex = $document->issuanceType->id % count($colors);
+                                                    $color = $colors[$colorIndex];
+                                                @endphp
+                                                <span class="inline-flex items-center rounded {{ $color['bg'] }} px-2 py-0.5 text-xs font-semibold {{ $color['text'] }} {{ $color['dark-bg'] }} {{ $color['dark-text'] }}">
                                                     {{ $document->issuanceType->name }}
                                                 </span>
                                             @endif
