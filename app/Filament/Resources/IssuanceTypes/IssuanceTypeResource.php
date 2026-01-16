@@ -18,7 +18,7 @@ class IssuanceTypeResource extends Resource
 {
     protected static ?string $model = IssuanceType::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquare3Stack3d;
 
     public static function form(Schema $schema): Schema
     {

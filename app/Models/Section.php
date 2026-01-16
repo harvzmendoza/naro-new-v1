@@ -36,4 +36,15 @@ class Section extends Model
      {
          return $this->hasMany(Document::class);
      }
+
+     public function approval()
+    {
+        return $this->hasOne(Approval::class)->latestOfMany();
+    }
+
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+
+    }
 }
